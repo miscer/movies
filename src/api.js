@@ -5,6 +5,6 @@ export async function fetchMovies() {
     throw new Error("Unable to fetch movies");
   }
 
-  const data = await response.json();
-  return data.movies;
+  const { data } = await response.json();
+  return data;
 }
