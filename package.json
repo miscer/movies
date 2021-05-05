@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "msw": "^0.28.2",
     "vue": "^3.0.11"
   },
   "devDependencies": {
@@ -27,5 +28,8 @@
     "less": "^3.0.4",
     "less-loader": "^5.0.0",
     "prettier": "^2.2.1"
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }
