@@ -5,7 +5,18 @@ import actors from "./actors.json";
 
 export const handlers = [
   rest.get("/movies", (req, res, ctx) => {
-    const data = Object.values(movies).map((movie) => ({
+    const params = req.url.searchParams;
+    const filters = {
+      title: params.get("title"),
+    };
+
+    const all = Object.values(movies);
+
+    const filtered = all.filter((movie) => {
+      return filters.title == null || movie.title.includes(filters.title);
+    });
+
+    const data = filtered.map((movie) => ({
       ...movie,
       genre: movie.genre.map((id) => genres[id]),
       actors: movie.actors.map((id) => actors[id]),

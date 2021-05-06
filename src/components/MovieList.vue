@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { ref, onMounted } from "vue";
+import { ref, toRefs, watch, onMounted } from "vue";
 import Movie from "@/components/Movie.vue";
 import { fetchMovies } from "@/api.js";
 
@@ -21,13 +21,19 @@ export default {
   components: {
     Movie,
   },
-  setup() {
+  props: {
+    title: String,
+  },
+  setup(props) {
+    const { title } = toRefs(props);
+
     const movies = ref([]);
     const getMovies = async () => {
-      movies.value = await fetchMovies();
+      movies.value = await fetchMovies({ title: title.value });
     };
 
     onMounted(getMovies);
+    watch(title, getMovies);
 
     return { movies };
   },

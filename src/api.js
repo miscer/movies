@@ -1,5 +1,11 @@
-export async function fetchMovies() {
-  const response = await fetch("/movies");
+export async function fetchMovies(filters = {}) {
+  const params = new URLSearchParams();
+
+  for (const filter in filters) {
+    params.set(filter, filters[filter]);
+  }
+
+  const response = await fetch(`/movies?${params}`);
 
   if (!response.ok) {
     throw new Error("Unable to fetch movies");

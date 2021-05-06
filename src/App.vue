@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <MovieList />
+    <label for="filter-title">Title:</label>
+    <input v-model="title" id="filter-title" />
+    <MovieList :title="title" />
   </div>
 </template>
 
@@ -11,6 +13,11 @@ export default {
   name: "App",
   components: {
     MovieList,
+  },
+  data() {
+    return {
+      title: "",
+    };
   },
 };
 </script>
