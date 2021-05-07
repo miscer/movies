@@ -2,7 +2,9 @@ export async function fetchMovies(filters = {}) {
   const params = new URLSearchParams();
 
   for (const filter in filters) {
-    params.set(filter, filters[filter]);
+    if (filters[filter] != null) {
+      params.set(filter, filters[filter]);
+    }
   }
 
   const response = await fetch(`/movies?${params}`);

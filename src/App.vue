@@ -1,8 +1,14 @@
 <template>
   <div id="app">
-    <label for="filter-title">Title:</label>
-    <input v-model="title" id="filter-title" />
-    <MovieList :title="title" />
+    <p>
+      <label for="filter-title">Title:</label>
+      <input v-model="title" id="filter-title" />
+    </p>
+    <p>
+      <label for="filter-year">Release year:</label>
+      <input v-model="year" id="filter-year" />
+    </p>
+    <MovieList :title="title || undefined" :year="year || undefined" />
   </div>
 </template>
 
@@ -17,6 +23,7 @@ export default {
   data() {
     return {
       title: "",
+      year: "",
     };
   },
 };
