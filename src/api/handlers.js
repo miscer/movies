@@ -8,13 +8,12 @@ export const handlers = [
     const params = req.url.searchParams;
     const filters = {
       title: params.get("title"),
+      genre: params.get("genre"),
+      year: params.get("year"),
     };
 
     const all = Object.values(movies);
-
-    const filtered = all.filter((movie) => {
-      return filters.title == null || movie.title.includes(filters.title);
-    });
+    const filtered = all.filter(getMovieFilter(filters));
 
     const data = filtered.map((movie) => ({
       ...movie,
@@ -30,3 +29,19 @@ export const handlers = [
     return res(ctx.json({ data }));
   }),
 ];
+
+const getMovieFilter = (filters) => {
+  const title = filters.title?.toLowerCase().trim();
+  const year = filters.year != null ? parseInt(filters.year, 10) : undefined;
+  const genre = filters.genre;
+
+  return (movie) => {
+    const releaseDate = new Date(movie.release_date);
+
+    return (
+      (title == null || movie.title.toLowerCase().includes(title)) &&
+      (genre == null || movie.genre.includes(genre)) &&
+      (year == null || releaseDate.getFullYear() === year)
+    );
+  };
+};
