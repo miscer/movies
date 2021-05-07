@@ -5,15 +5,15 @@ import actors from "./actors.json";
 
 export const handlers = [
   rest.get("/movies", (req, res, ctx) => {
-    const params = req.url.searchParams;
-    const filters = {
-      title: params.get("title"),
-      genre: params.get("genre"),
-      year: params.get("year"),
+    const query = req.url.searchParams;
+    const params = {
+      title: query.get("title"),
+      genre: query.get("genre"),
+      year: query.get("year"),
     };
 
     const all = Object.values(movies);
-    const filtered = all.filter(getMovieFilter(filters));
+    const filtered = all.filter(getMovieFilter(params));
 
     const data = filtered.map((movie) => ({
       ...movie,
@@ -30,10 +30,10 @@ export const handlers = [
   }),
 ];
 
-const getMovieFilter = (filters) => {
-  const title = filters.title?.toLowerCase().trim();
-  const year = filters.year != null ? parseInt(filters.year, 10) : undefined;
-  const genre = filters.genre;
+const getMovieFilter = (params) => {
+  const title = params.title?.toLowerCase().trim();
+  const year = params.year != null ? parseInt(params.year, 10) : undefined;
+  const genre = params.genre;
 
   return (movie) => {
     const releaseDate = new Date(movie.release_date);

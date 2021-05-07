@@ -1,5 +1,5 @@
 <template>
-  <select :value="modelValue" @change="updateValue">
+  <select :value="selected" @change="updateValue">
     <option value=""></option>
     <option v-for="genre in genres" :key="genre.id" :value="genre.id">
       {{ genre.title }}
@@ -14,9 +14,9 @@ import { fetchGenres } from "@/api.js";
 export default {
   name: "GenreSelect",
   props: {
-    modelValue: String,
+    selected: String,
   },
-  emits: ["update:modelValue"],
+  emits: ["update:selected"],
   setup() {
     const genres = ref([]);
     const getGenres = async () => {
@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     updateValue(event) {
-      this.$emit("update:modelValue", event.target.value);
+      this.$emit("update:selected", event.target.value);
     },
   },
 };

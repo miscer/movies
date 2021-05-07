@@ -1,41 +1,36 @@
 <template>
   <div id="app">
-    <p>
-      <label for="filter-title">Title:</label>
-      <input v-model="title" id="filter-title" />
-    </p>
-    <p>
-      <label for="filter-year">Release year:</label>
-      <input v-model="year" id="filter-year" />
-    </p>
-    <p>
-      <label for="filter-genre">Genre:</label>
-      <GenreSelect v-model="genre" id="filter-genre" />
-    </p>
-    <MovieList
-      :title="title || undefined"
-      :year="year || undefined"
-      :genre="genre || undefined"
-    />
+    <Filters v-model:filters="filters" />
+    <MovieList :params="listParams" />
   </div>
 </template>
 
 <script>
 import MovieList from "@/components/MovieList.vue";
-import GenreSelect from "@/components/GenreSelect.vue";
+import Filters from "@/components/Filters.vue";
 
 export default {
   name: "App",
   components: {
-    GenreSelect,
+    Filters,
     MovieList,
   },
   data() {
     return {
-      title: "",
-      year: "",
-      genre: "",
+      filters: undefined,
     };
+  },
+  computed: {
+    listParams() {
+      const filters = this.filters ?? {};
+      const params = {};
+
+      for (const name in filters) {
+        if (filters[name]) params[name] = filters[name];
+      }
+
+      return params;
+    },
   },
 };
 </script>
