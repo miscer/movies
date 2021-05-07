@@ -24,21 +24,22 @@ export default {
   props: {
     title: String,
     year: String,
+    genre: String,
   },
   setup(props) {
-    const { title, year } = toRefs(props);
+    const { title, year, genre } = toRefs(props);
 
     const movies = ref([]);
     const getMovies = async () => {
       movies.value = await fetchMovies({
         title: title.value,
         year: year.value,
+        genre: genre.value,
       });
     };
 
     onMounted(getMovies);
-    watch(title, getMovies);
-    watch(year, getMovies);
+    watch([title, year, genre], getMovies);
 
     return { movies };
   },

@@ -8,22 +8,33 @@
       <label for="filter-year">Release year:</label>
       <input v-model="year" id="filter-year" />
     </p>
-    <MovieList :title="title || undefined" :year="year || undefined" />
+    <p>
+      <label for="filter-genre">Genre:</label>
+      <GenreSelect v-model="genre" id="filter-genre" />
+    </p>
+    <MovieList
+      :title="title || undefined"
+      :year="year || undefined"
+      :genre="genre || undefined"
+    />
   </div>
 </template>
 
 <script>
 import MovieList from "@/components/MovieList.vue";
+import GenreSelect from "@/components/GenreSelect.vue";
 
 export default {
   name: "App",
   components: {
+    GenreSelect,
     MovieList,
   },
   data() {
     return {
       title: "",
       year: "",
+      genre: "",
     };
   },
 };

@@ -16,3 +16,14 @@ export async function fetchMovies(filters = {}) {
   const { data } = await response.json();
   return data;
 }
+
+export async function fetchGenres() {
+  const response = await fetch("/genres");
+
+  if (!response.ok) {
+    throw new Error("Unable to fetch genres");
+  }
+
+  const { data } = await response.json();
+  return data;
+}
