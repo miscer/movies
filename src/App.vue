@@ -27,7 +27,9 @@ html {
 }
 
 .app {
-  width: 960px;
-  margin: 50px auto;
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 50px 20px;
 }
 </style>

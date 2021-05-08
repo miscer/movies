@@ -74,17 +74,5 @@ const initialFilters = {
   label {
     margin-bottom: 10px;
   }
-
-  &.title {
-    width: 300px;
-  }
-
-  &.year {
-    width: 100px;
-  }
-
-  &.genre {
-    width: 200px;
-  }
 }
 </style>

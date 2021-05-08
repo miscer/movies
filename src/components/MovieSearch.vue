@@ -1,11 +1,15 @@
 <template>
-  <div class="movie-search">
-    <header class="header">
-      <h1 class="title">Movie search</h1>
-      <Filters v-model:filters="filters" />
-    </header>
-    <MovieList :params="listParams" />
-  </div>
+  <section class="movie-search">
+    <h1 class="title">Movie search</h1>
+    <div class="body">
+      <nav class="sidebar">
+        <Filters v-model:filters="filters" />
+      </nav>
+      <div class="main">
+        <MovieList :params="listParams" />
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>
@@ -39,11 +43,25 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.header {
-  margin-bottom: 40px;
-}
-
 .title {
   font-size: 2rem;
+}
+
+.body {
+  display: flex;
+  align-items: flex-start;
+}
+
+.main {
+  order: 0;
+  width: 75%;
+}
+
+.sidebar {
+  order: 1;
+  width: 25%;
+  padding-left: 40px;
+  position: sticky;
+  top: 40px;
 }
 </style>
