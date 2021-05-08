@@ -6,6 +6,7 @@
       <ul class="genres">
         <li v-for="(genre, index) in genres" :key="index">{{ genre }}</li>
       </ul>
+      <p class="description">{{ description }}</p>
       <ul class="actors">
         <li v-for="(actor, index) in actors" :key="index">{{ actor }}</li>
       </ul>
@@ -18,6 +19,7 @@ export default {
   name: "Movie",
   props: {
     title: String,
+    description: String,
     releaseDate: Date,
     posterUrl: String,
     genres: Array,
@@ -76,12 +78,16 @@ export default {
   }
 }
 
+.description {
+  margin: 0 0 20px;
+}
+
 .genres {
   display: flex;
   flex-wrap: wrap;
   list-style: none;
   padding: 0;
-  margin: 0 0 20px;
+  margin: 0 0 10px;
 
   li {
     display: block;

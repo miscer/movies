@@ -4,6 +4,7 @@
       v-for="movie in movies"
       :key="movie.id"
       :title="movie.title"
+      :description="movie.description"
       :release-date="new Date(movie.release_date)"
       :genres="movie.genres.map((g) => g.title)"
       :actors="movie.actors.map((a) => a.name)"
