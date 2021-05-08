@@ -7,6 +7,7 @@
       :release-date="new Date(movie.release_date)"
       :genres="movie.genres.map((g) => g.title)"
       :actors="movie.actors.map((a) => a.name)"
+      :poster-url="movie.poster_url"
     />
   </div>
 </template>

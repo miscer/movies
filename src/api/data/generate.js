@@ -32,6 +32,7 @@ for (let id = 1; id <= 100; id++) {
     genres: _.sampleSize(genres, 2).map((genre) => genre.id),
     actors: _.sampleSize(actors, 3).map((actor) => actor.id),
     release_date: new Date(casual.unix_time * 1000).toISOString(),
+    poster_url: `https://picsum.photos/400/600?random=${id}`,
   };
 }
 
