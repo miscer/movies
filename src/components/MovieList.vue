@@ -5,7 +5,7 @@
       :key="movie.id"
       :title="movie.title"
       :release-date="new Date(movie.release_date)"
-      :genres="movie.genre.map((g) => g.title)"
+      :genres="movie.genres.map((g) => g.title)"
       :actors="movie.actors.map((a) => a.name)"
     />
   </div>

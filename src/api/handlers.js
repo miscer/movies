@@ -1,7 +1,5 @@
 import { rest } from "msw";
-import movies from "./movies.json";
-import genres from "./genres.json";
-import actors from "./actors.json";
+import data from "./data/data.json";
 
 export const handlers = [
   rest.get("/movies", (req, res, ctx) => {
@@ -12,21 +10,21 @@ export const handlers = [
       year: query.get("year"),
     };
 
-    const all = Object.values(movies);
+    const all = Object.values(data.movies);
     const filtered = all.filter(getMovieFilter(params));
 
-    const data = filtered.map((movie) => ({
+    const result = filtered.map((movie) => ({
       ...movie,
-      genre: movie.genre.map((id) => genres[id]),
-      actors: movie.actors.map((id) => actors[id]),
+      genres: movie.genres.map((id) => data.genres[id]),
+      actors: movie.actors.map((id) => data.actors[id]),
     }));
 
-    return res(ctx.json({ data }));
+    return res(ctx.json({ data: result }));
   }),
 
   rest.get("/genres", (req, res, ctx) => {
-    const data = Object.values(genres);
-    return res(ctx.json({ data }));
+    const result = Object.values(data.genres);
+    return res(ctx.json({ data: result }));
   }),
 ];
 
@@ -40,7 +38,7 @@ const getMovieFilter = (params) => {
 
     return (
       (title == null || movie.title.toLowerCase().includes(title)) &&
-      (genre == null || movie.genre.includes(genre)) &&
+      (genre == null || movie.genres.includes(genre)) &&
       (year == null || releaseDate.getFullYear() === year)
     );
   };

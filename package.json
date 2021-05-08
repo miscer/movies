@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "lodash": "^4.17.21",
     "msw": "^0.28.2",
     "vue": "^3.0.11"
   },
@@ -22,6 +23,7 @@
     "@vue/eslint-config-prettier": "^6.0.0",
     "@vue/test-utils": "^1.0.3",
     "babel-eslint": "^10.1.0",
+    "casual": "^1.6.2",
     "eslint": "^6.7.2",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-vue": "^7.9.0",
