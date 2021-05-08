@@ -1,8 +1,18 @@
 export async function fetchMovies(params = {}) {
   const query = new URLSearchParams();
 
-  for (const filter in params) {
-    query.set(filter, params[filter]);
+  if (params.title) {
+    query.set("title", params.title);
+  }
+
+  if (params.year) {
+    query.set("year", params.year);
+  }
+
+  if (params.genre != null) {
+    for (const genre of params.genre) {
+      query.append("genre", genre);
+    }
   }
 
   const response = await fetch(`/movies?${query}`);

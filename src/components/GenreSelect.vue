@@ -1,10 +1,23 @@
 <template>
-  <select :value="selected" @change="updateValue">
-    <option value=""></option>
-    <option v-for="genre in genres" :key="genre.id" :value="genre.id">
-      {{ genre.title }}
-    </option>
-  </select>
+  <ul class="genre-select">
+    <li>
+      <label>
+        <input type="checkbox" :checked="allSelected" @click="selectAll" />
+        All
+      </label>
+    </li>
+    <li v-for="genre in genres" :key="genre.id">
+      <label>
+        <input
+          type="checkbox"
+          :value="genre.id"
+          :checked="isGenreSelected(genre.id)"
+          @click="selectGenre"
+        />
+        {{ genre.title }}
+      </label>
+    </li>
+  </ul>
 </template>
 
 <script>
@@ -14,7 +27,7 @@ import { fetchGenres } from "@/api.js";
 export default {
   name: "GenreSelect",
   props: {
-    selected: String,
+    selected: Array,
   },
   emits: ["update:selected"],
   setup() {
@@ -28,9 +41,45 @@ export default {
     return { genres };
   },
   methods: {
-    updateValue(event) {
-      this.$emit("update:selected", event.target.value);
+    isGenreSelected(id) {
+      return this.selected.includes(id);
+    },
+    selectGenre(event) {
+      const { value, checked } = event.target;
+      const selected = new Set(this.selected);
+
+      if (checked) {
+        selected.add(value);
+      } else {
+        selected.delete(value);
+      }
+
+      this.$emit("update:selected", [...selected]);
+    },
+    selectAll() {
+      this.$emit("update:selected", []);
+    },
+  },
+  computed: {
+    allSelected() {
+      return this.selected.length === 0;
     },
   },
 };
 </script>
+
+<style lang="less" scoped>
+.genre-select {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  li {
+    margin-bottom: 5px;
+  }
+
+  label {
+    cursor: pointer;
+  }
+}
+</style>

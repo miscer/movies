@@ -19,12 +19,10 @@
       />
     </div>
     <div class="filter genre">
-      <label for="filter-genre">Genre:</label>
+      <label>Genre:</label>
       <GenreSelect
-        name="genre"
         :selected="filters.genre"
         @update:selected="updateGenreFilter"
-        id="filter-genre"
       />
     </div>
   </div>
@@ -57,7 +55,7 @@ export default {
 
 const initialFilters = {
   title: "",
-  genre: "",
+  genre: [],
   year: "",
 };
 </script>

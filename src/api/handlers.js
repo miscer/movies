@@ -6,7 +6,7 @@ export const handlers = [
     const query = req.url.searchParams;
     const params = {
       title: query.get("title"),
-      genre: query.get("genre"),
+      genres: query.getAll("genre"),
       year: query.get("year"),
     };
 
@@ -31,14 +31,15 @@ export const handlers = [
 const getMovieFilter = (params) => {
   const title = params.title?.toLowerCase().trim();
   const year = params.year != null ? parseInt(params.year, 10) : undefined;
-  const genre = params.genre;
+  const genres = params.genres;
 
   return (movie) => {
     const releaseDate = new Date(movie.release_date);
 
     return (
       (title == null || movie.title.toLowerCase().includes(title)) &&
-      (genre == null || movie.genres.includes(genre)) &&
+      (genres.length === 0 ||
+        genres.some((genre) => movie.genres.includes(genre))) &&
       (year == null || releaseDate.getFullYear() === year)
     );
   };
