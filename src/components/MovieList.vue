@@ -15,6 +15,7 @@
 
 <script>
 import { ref, toRefs, watch, onMounted } from "vue";
+import debounce from "lodash/debounce";
 import Movie from "@/components/Movie.vue";
 import { fetchMovies } from "@/api.js";
 
@@ -37,7 +38,7 @@ export default {
       loading.value = false;
     };
     onMounted(getMovies);
-    watch(params, getMovies);
+    watch(params, debounce(getMovies, 200));
 
     return { movies, loading };
   },
