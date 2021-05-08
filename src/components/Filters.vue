@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <p>
+  <div class="filters">
+    <div class="filter title">
       <label for="filter-title">Title:</label>
       <input
         name="title"
@@ -8,8 +8,8 @@
         @input="updateInputFilter"
         id="filter-title"
       />
-    </p>
-    <p>
+    </div>
+    <div class="filter year">
       <label for="filter-year">Release year:</label>
       <input
         name="year"
@@ -17,8 +17,8 @@
         @input="updateInputFilter"
         id="filter-year"
       />
-    </p>
-    <p>
+    </div>
+    <div class="filter genre">
       <label for="filter-genre">Genre:</label>
       <GenreSelect
         name="genre"
@@ -26,7 +26,7 @@
         @update:selected="updateGenreFilter"
         id="filter-genre"
       />
-    </p>
+    </div>
   </div>
 </template>
 <script>
@@ -61,4 +61,30 @@ const initialFilters = {
   year: "",
 };
 </script>
-<style lang="less"></style>
+
+<style lang="less" scoped>
+.filters {
+}
+
+.filter {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+
+  label {
+    margin-bottom: 10px;
+  }
+
+  &.title {
+    width: 300px;
+  }
+
+  &.year {
+    width: 100px;
+  }
+
+  &.genre {
+    width: 200px;
+  }
+}
+</style>
