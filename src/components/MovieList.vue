@@ -1,5 +1,5 @@
 <template>
-  <div class="movie-list">
+  <div class="movie-list" :class="{ loading }">
     <Movie
       v-for="movie in movies"
       :key="movie.id"
@@ -29,23 +29,32 @@ export default {
   setup(props) {
     const { params } = toRefs(props);
     const movies = ref([]);
+    const loading = ref(true);
 
     const getMovies = async () => {
+      loading.value = true;
       movies.value = await fetchMovies(params.value);
+      loading.value = false;
     };
     onMounted(getMovies);
     watch(params, getMovies);
 
-    return { movies };
+    return { movies, loading };
   },
 };
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 .movie-list {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-row-gap: 40px;
   grid-column-gap: 40px;
+  transition: opacity 0.1s ease-in;
+
+  &.loading {
+    opacity: 0.5;
+    cursor: wait;
+  }
 }
 </style>

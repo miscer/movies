@@ -19,12 +19,12 @@ export const handlers = [
       actors: movie.actors.map((id) => data.actors[id]),
     }));
 
-    return res(ctx.json({ data: result }));
+    return res(ctx.delay(500), ctx.json({ data: result }));
   }),
 
   rest.get("/genres", (req, res, ctx) => {
     const result = Object.values(data.genres);
-    return res(ctx.json({ data: result }));
+    return res(ctx.delay(500), ctx.json({ data: result }));
   }),
 ];
 
