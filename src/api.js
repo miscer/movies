@@ -1,3 +1,5 @@
+const apiUrl = "http://api";
+
 export async function fetchMovies(params = {}) {
   const query = new URLSearchParams();
 
@@ -11,7 +13,7 @@ export async function fetchMovies(params = {}) {
     }
   }
 
-  const response = await fetch(`/movies?${query}`);
+  const response = await fetch(`${apiUrl}/movies?${query}`);
 
   if (!response.ok) {
     throw new Error("Unable to fetch movies");
@@ -22,7 +24,7 @@ export async function fetchMovies(params = {}) {
 }
 
 export async function fetchGenres() {
-  const response = await fetch("/genres");
+  const response = await fetch(`${apiUrl}/genres`);
 
   if (!response.ok) {
     throw new Error("Unable to fetch genres");
