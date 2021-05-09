@@ -17,8 +17,7 @@
 </template>
 
 <script>
-import { ref, toRefs, watch, onMounted } from "vue";
-import debounce from "lodash/debounce";
+import { ref, toRefs, watchEffect } from "vue";
 import Movie from "@/components/Movie.vue";
 import { fetchMovies } from "@/api.js";
 
@@ -35,13 +34,18 @@ export default {
     const movies = ref([]);
     const loading = ref(true);
 
-    const getMovies = async () => {
+    watchEffect(async (onInvalidate) => {
+      let canceled = false;
+      onInvalidate(() => (canceled = true));
+
       loading.value = true;
-      movies.value = await fetchMovies(params.value);
-      loading.value = false;
-    };
-    onMounted(getMovies);
-    watch(params, debounce(getMovies, 200));
+      const result = await fetchMovies(params.value);
+
+      if (!canceled) {
+        movies.value = result;
+        loading.value = false;
+      }
+    });
 
     return { movies, loading };
   },
