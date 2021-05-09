@@ -1,7 +1,7 @@
 import { render } from "@testing-library/vue";
 import userEvent from "@testing-library/user-event";
 import GenreSelect from "@/components/GenreSelect.vue";
-import { setupMockApi } from "@/api/test";
+import { setupMockApi } from "@/mock-api/test";
 
 const api = setupMockApi();
 

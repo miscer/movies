@@ -1,6 +1,6 @@
 import { render, waitFor } from "@testing-library/vue";
 import userEvent from "@testing-library/user-event";
-import { setupMockApi } from "@/api/test";
+import { setupMockApi } from "@/mock-api/test";
 import MovieSearch from "@/components/MovieSearch.vue";
 
 const api = setupMockApi();

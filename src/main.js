@@ -1,6 +1,6 @@
 import { createApp } from "vue";
 import App from "./components/App.vue";
-import { setupMockApi } from "@/api/browser.js";
+import { setupMockApi } from "@/mock-api/browser.js";
 
 setupMockApi();
 
