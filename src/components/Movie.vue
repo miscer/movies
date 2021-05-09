@@ -35,6 +35,7 @@ export default {
 
 <style lang="less" scoped>
 .movie {
+  max-width: 300px;
   position: relative;
   overflow: hidden;
 }

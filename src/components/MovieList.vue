@@ -69,6 +69,20 @@ export default {
   grid-column-gap: 40px;
 }
 
+@media (max-width: 1000px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 800px) {
+  .grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
 .empty {
   padding: 60px 40px;
   text-align: center;

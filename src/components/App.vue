@@ -30,6 +30,6 @@ html {
   width: 100%;
   max-width: 1180px;
   margin: 0 auto;
-  padding: 50px 20px;
+  padding: 40px 20px;
 }
 </style>

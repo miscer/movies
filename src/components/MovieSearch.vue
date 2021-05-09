@@ -73,4 +73,32 @@ const getListParams = (filters = {}) => {
   position: sticky;
   top: 40px;
 }
+
+@media (max-width: 1000px) {
+  .main {
+    width: 70%;
+  }
+
+  .sidebar {
+    width: 30%;
+  }
+}
+
+@media (max-width: 650px) {
+  .body {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .main,
+  .sidebar {
+    order: initial;
+    width: auto;
+  }
+
+  .sidebar {
+    padding-left: 0;
+    position: static;
+  }
+}
 </style>
