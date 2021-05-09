@@ -1,6 +1,6 @@
 <template>
   <div class="filters">
-    <div class="filter title">
+    <div class="filter">
       <label for="filter-title">Title:</label>
       <input
         name="title"
@@ -9,14 +9,14 @@
         id="filter-title"
       />
     </div>
-    <div class="filter year">
+    <div class="filter">
       <label>Released:</label>
       <PeriodSelect
         :selected="filters.period"
         @update:selected="updatePeriodFilter"
       />
     </div>
-    <div class="filter genre">
+    <div class="filter">
       <label>Genre:</label>
       <GenreSelect
         :selected="filters.genre"
@@ -73,6 +73,7 @@ const initialFilters = {
   margin-bottom: 20px;
 
   label {
+    font-weight: bold;
     margin-bottom: 10px;
   }
 }
