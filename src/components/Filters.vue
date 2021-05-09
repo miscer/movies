@@ -10,12 +10,10 @@
       />
     </div>
     <div class="filter year">
-      <label for="filter-year">Release year:</label>
-      <input
-        name="year"
-        :value="filters.year"
-        @input="updateInputFilter"
-        id="filter-year"
+      <label>Released:</label>
+      <PeriodSelect
+        :selected="filters.period"
+        @update:selected="updatePeriodFilter"
       />
     </div>
     <div class="filter genre">
@@ -29,10 +27,11 @@
 </template>
 <script>
 import GenreSelect from "@/components/GenreSelect.vue";
+import PeriodSelect from "@/components/PeriodSelect.vue";
 
 export default {
   name: "Filters",
-  components: { GenreSelect },
+  components: { PeriodSelect, GenreSelect },
   props: {
     filters: {
       type: Object,
@@ -46,6 +45,10 @@ export default {
       const filters = { ...this.filters, [name]: value };
       this.$emit("update:filters", filters);
     },
+    updatePeriodFilter(selected) {
+      const filters = { ...this.filters, period: selected };
+      this.$emit("update:filters", filters);
+    },
     updateGenreFilter(selected) {
       const filters = { ...this.filters, genre: selected };
       this.$emit("update:filters", filters);
@@ -56,7 +59,7 @@ export default {
 const initialFilters = {
   title: "",
   genre: [],
-  year: "",
+  period: null,
 };
 </script>
 

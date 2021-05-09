@@ -32,8 +32,12 @@ export default {
       const filters = this.filters ?? {};
       const params = {};
 
-      for (const name in filters) {
-        if (filters[name]) params[name] = filters[name];
+      if (filters.title) params.title = filters.title;
+      if (filters.genre?.length > 0) params.genre = filters.genre;
+
+      if (filters.period) {
+        params.from = new Date(Date.UTC(filters.period, 0));
+        params.to = new Date(Date.UTC(filters.period + 9, 11, 31, 23, 59, 59));
       }
 
       return params;

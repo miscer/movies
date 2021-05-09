@@ -7,7 +7,8 @@ export const handlers = [
     const params = {
       title: query.get("title"),
       genres: query.getAll("genre"),
-      year: query.get("year"),
+      from: query.get("from"),
+      to: query.get("to"),
     };
 
     const all = Object.values(data.movies);
@@ -30,7 +31,8 @@ export const handlers = [
 
 const getMovieFilter = (params) => {
   const title = params.title?.toLowerCase().trim();
-  const year = params.year != null ? parseInt(params.year, 10) : undefined;
+  const from = params.from ? new Date(params.from) : null;
+  const to = params.to ? new Date(params.to) : null;
   const genres = params.genres;
 
   return (movie) => {
@@ -40,7 +42,8 @@ const getMovieFilter = (params) => {
       (title == null || movie.title.toLowerCase().includes(title)) &&
       (genres.length === 0 ||
         genres.some((genre) => movie.genres.includes(genre))) &&
-      (year == null || releaseDate.getFullYear() === year)
+      (from == null || releaseDate >= from) &&
+      (to == null || releaseDate <= to)
     );
   };
 };

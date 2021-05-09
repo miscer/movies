@@ -12,7 +12,7 @@
           type="checkbox"
           :value="genre.id"
           :checked="isGenreSelected(genre.id)"
-          @click="selectGenre"
+          @change="selectGenre"
         />
         {{ genre.title }}
       </label>
