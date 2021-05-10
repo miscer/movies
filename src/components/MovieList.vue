@@ -34,6 +34,9 @@ export default {
     const movies = ref([]);
     const loading = ref(true);
 
+    // movies are re-loaded every time the parameters change, but only the
+    // latest request should update the component to prevent race conditions,
+    // where an earlier request would overwrite the results of a later request
     watchEffect(async (onInvalidate) => {
       let canceled = false;
       onInvalidate(() => (canceled = true));

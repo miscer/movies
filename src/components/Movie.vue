@@ -4,6 +4,10 @@
     <h3 class="title">{{ title }} ({{ releaseYear }})</h3>
     <article class="info">
       <ul class="genres">
+        <!--
+        the key is not needed here as the list is simple, but this is needed to
+        suppress a lint error
+        -->
         <li v-for="(genre, index) in genres" :key="index">{{ genre }}</li>
       </ul>
       <p class="description">{{ description }}</p>

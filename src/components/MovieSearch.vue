@@ -30,12 +30,17 @@ export default {
     };
   },
   watch: {
+    // selected filters state is updated immediately, but parameters for the
+    // movie list are updated only when the user finishes changing the filters.
     selectedFilters: debounce(function (filters) {
       this.listParams = getListParams(filters);
     }, 500),
   },
 };
 
+/**
+ * Converts selected filters into parameters for the movie list
+ */
 const getListParams = (filters = {}) => {
   const params = {};
 
