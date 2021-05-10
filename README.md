@@ -12,13 +12,15 @@ When filters are changed, there is a 500 ms delay between actually re-loading th
 
 ## API 
 
-There are two API endpoints. The first one is for fetching all available genres. It simply returns a list of genres, each with an ID and a title. This endpoint is used to show the genre filter.
+There are two API endpoints. The first one is for fetching all available genres. It simply returns a list of genres, each with an ID and a title. This endpoint is used to show the genre filter. Since there is only a limited number of genres, no additional filtering or searching is necessary.
 
-The second one returns movies in the database. Movies can be filtered by adding query parameters:
+The second endpoint returns movies in the database. Movies can be filtered by adding query parameters:
 
 * Title, by adding `title=abc` to the query. This will match any part of the title, case-insensitive.
 * Genres, by adding one or more `genre=2` to the query. Movies that have at least one of the specified genres will be returned in the response.
 * Release date, by adding `from` and/or `to` to the query. The value is a date string, and the API will select only movies released between the specified dates.
+
+These query parameters are based on the current basic interface. If the goal was to support multiple clients with the same API, some more advanced filtering could be implemented. 
 
 Complete actor and genre objects are included for each movie, to make data loading easier. However, this can be inefficient if there are large numbers of genres or actors for each movie. This could be solved by returning only the actor and genre IDs, and letting the client load these in separate requests. 
 
