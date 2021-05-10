@@ -2,7 +2,12 @@
   <ul class="genre-select">
     <li>
       <label>
-        <input type="checkbox" :checked="allSelected" @click="selectAll" />
+        <input
+          type="checkbox"
+          :checked="allSelected"
+          :disabled="allSelected"
+          @change="selectAll"
+        />
         All
       </label>
     </li>
@@ -56,8 +61,10 @@ export default {
 
       this.$emit("update:selected", [...selected]);
     },
-    selectAll() {
-      this.$emit("update:selected", []);
+    selectAll(event) {
+      if (event.target.checked) {
+        this.$emit("update:selected", []);
+      }
     },
   },
   computed: {
