@@ -1,6 +1,13 @@
 <template>
   <article class="movie">
-    <img class="poster" :src="posterUrl" :alt="'Poster for ' + title" />
+    <img
+      class="poster"
+      :src="posterUrl"
+      :alt="'Poster for ' + title"
+      width="400"
+      height="600"
+      loading="lazy"
+    />
     <h3 class="title">{{ title }} ({{ releaseYear }})</h3>
     <article class="info">
       <ul class="genres">
@@ -42,6 +49,7 @@ export default {
   max-width: 300px;
   position: relative;
   overflow: hidden;
+  background-color: #ccc;
 }
 
 .poster {
