@@ -1,4 +1,4 @@
-const apiUrl = "http://api";
+const apiUrl = "https://api";
 
 export async function fetchMovies(params = {}) {
   const query = new URLSearchParams();

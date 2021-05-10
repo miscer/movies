@@ -2,7 +2,7 @@ import { rest } from "msw";
 import data from "./data/data.json";
 
 export const handlers = [
-  rest.get("http://api/movies", (req, res, ctx) => {
+  rest.get("https://api/movies", (req, res, ctx) => {
     const query = req.url.searchParams;
     const params = {
       title: query.get("title"),
@@ -23,7 +23,7 @@ export const handlers = [
     return res(ctx.delay(500), ctx.json({ data: result }));
   }),
 
-  rest.get("http://api/genres", (req, res, ctx) => {
+  rest.get("https://api/genres", (req, res, ctx) => {
     const result = Object.values(data.genres);
     return res(ctx.delay(500), ctx.json({ data: result }));
   }),
